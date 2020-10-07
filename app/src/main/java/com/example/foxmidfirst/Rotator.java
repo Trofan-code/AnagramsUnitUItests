@@ -2,43 +2,17 @@ package com.example.foxmidfirst;
 
 import java.util.ArrayList;
 
-public class Rotate {
-    String sentenceFromUser;
-    String ignoreSymbols;
-
-    public Rotate(String sentenceFromUser, String ignoreSymbols) {
-        this.sentenceFromUser = sentenceFromUser;
-        this.ignoreSymbols = ignoreSymbols;
-    }
-
-    public String getSentenceFromUser() {
-        return sentenceFromUser;
-    }
-
-    public void setSentenceFromUser(String sentenceFromUser) {
-        this.sentenceFromUser = sentenceFromUser;
-    }
-
-    public String getIgnoreSymbols() {
-        return ignoreSymbols;
-    }
-
-    public void setIgnoreSymbols(String ignoreSymbols) {
-        this.ignoreSymbols = ignoreSymbols;
-    }
-
-    public Rotate() {
-    }
+public class Rotator {
 
     public String rotateWord(String sentenceFromUser, String ignoreSymbols) {
-        String[] strArrStringFromUser = sentenceFromUser.split(" ");
-        ArrayList<Integer> index = new ArrayList<>();
-        for (int i = 0; i < strArrStringFromUser.length; i++) {
-            String s = strArrStringFromUser[i];
+        String[] wordsFromIncomingSentence = sentenceFromUser.split(" ");
+        ArrayList<Integer> indexesOfTheIgnoreChars = new ArrayList<>();
+        for (int i = 0; i < wordsFromIncomingSentence.length; i++) {
+            String s = wordsFromIncomingSentence[i];
             for (int j = 0; j < s.length(); j++) {
                 for (int k = 0; k < ignoreSymbols.length(); k++) {
                     if (s.charAt(j) == ignoreSymbols.charAt(k)) {
-                        index.add(j);
+                        indexesOfTheIgnoreChars.add(j);
                     }
                 }
             }
@@ -48,27 +22,27 @@ public class Rotate {
             int indLastLetter = s.length() - 1;
             char tempChar;
             for (int k = 0; k < tempCharArr.length; k++) {
-                if (thereIsIgnoreChar(indFirstLetter, index) != true && thereIsIgnoreChar(indLastLetter, index) != true) {
+                if (thereIsIgnoreChar(indFirstLetter, indexesOfTheIgnoreChars) != true && thereIsIgnoreChar(indLastLetter, indexesOfTheIgnoreChars) != true) {
                     tempChar = tempCharArr[indFirstLetter];
                     tempCharArr[indFirstLetter] = tempCharArr[indLastLetter];
                     tempCharArr[indLastLetter] = tempChar;
                     indFirstLetter++;
                     indLastLetter--;
-                } else if (thereIsIgnoreChar(indFirstLetter, index) == true && thereIsIgnoreChar(indLastLetter, index) != true) {
+                } else if (thereIsIgnoreChar(indFirstLetter, indexesOfTheIgnoreChars) == true && thereIsIgnoreChar(indLastLetter, indexesOfTheIgnoreChars) != true) {
                     indFirstLetter++;
-                } else if (thereIsIgnoreChar(indFirstLetter, index) != true && thereIsIgnoreChar(indLastLetter, index) == true) {
+                } else if (thereIsIgnoreChar(indFirstLetter, indexesOfTheIgnoreChars) != true && thereIsIgnoreChar(indLastLetter, indexesOfTheIgnoreChars) == true) {
                     indLastLetter--;
                 }
                 if (indFirstLetter >= indLastLetter) {
                     k = tempCharArr.length;
                 }
             }
-             strArrStringFromUser[i] = String.copyValueOf(tempCharArr);
-            index.removeAll(index);
+             wordsFromIncomingSentence[i] = String.copyValueOf(tempCharArr);
+            indexesOfTheIgnoreChars.removeAll(indexesOfTheIgnoreChars);
         }
         String sentence="";
-        for (int i=0;i<strArrStringFromUser.length;i++){
-            sentence+=strArrStringFromUser[i]+" ";
+        for (int i=0;i<wordsFromIncomingSentence.length;i++){
+            sentence+=wordsFromIncomingSentence[i]+" ";
         }
         return sentence;
     }

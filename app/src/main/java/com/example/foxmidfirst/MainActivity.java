@@ -14,10 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextUserSymbolExclude;
     private TextView textViewAnswer;
     private Button btnStart;
-    Rotate rotate = new Rotate();
+    private Rotator rotator = new Rotator();
     private String userStringSentence;
-    private String[] myUserArrString;
-
     private String userSymboIgnore;
 
 
@@ -27,14 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userSymboIgnore = editTextUserSymbolExclude.getText().toString();//stringa iz edit text
+                userSymboIgnore = editTextUserSymbolExclude.getText().toString();
                 userStringSentence = editTextUserString.getText().toString();
-
-                textViewAnswer.setText(rotate.rotateWord(userStringSentence,userSymboIgnore));
+                textViewAnswer.setText(rotator.rotateWord(userStringSentence,userSymboIgnore));
             }
         });
 
