@@ -43,8 +43,10 @@ public class Rotator {
         String sentence="";
         for (int i=0;i<wordsFromIncomingSentence.length;i++){
             sentence+=wordsFromIncomingSentence[i]+" ";
+
         }
-        return sentence;
+        sentence.trim();
+        return  sentence;
     }
     private boolean thereIsIgnoreChar(int indLetter, ArrayList index) {
         boolean bool = false;

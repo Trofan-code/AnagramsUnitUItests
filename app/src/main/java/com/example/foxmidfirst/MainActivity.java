@@ -15,9 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewAnswer;
     private Button btnStart;
     private Rotator rotator = new Rotator();
-    private String userStringSentence;
-    private String userSymboIgnore;
-
 
 
     @Override
@@ -28,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String userStringSentence;
+                String userSymboIgnore;
                 userSymboIgnore = editTextUserSymbolExclude.getText().toString();
                 userStringSentence = editTextUserString.getText().toString();
                 textViewAnswer.setText(rotator.rotateWord(userStringSentence,userSymboIgnore));
@@ -41,8 +40,5 @@ public class MainActivity extends AppCompatActivity {
         editTextUserSymbolExclude = findViewById(R.id.edText2);
         textViewAnswer = findViewById(R.id.textView4);
         btnStart = findViewById(R.id.button1);
-        userSymboIgnore = editTextUserSymbolExclude.getText().toString();
-        userStringSentence = editTextUserString.getText().toString();
-
     }
 }
