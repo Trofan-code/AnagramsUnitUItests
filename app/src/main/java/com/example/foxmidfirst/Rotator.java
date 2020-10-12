@@ -1,6 +1,5 @@
 package com.example.foxmidfirst;
 
-import java.util.ArrayList;
 
 public class Rotator {
 
@@ -14,15 +13,15 @@ public class Rotator {
             int indLastLetter = oneWordFromUserSentence.length() - 1;
             char tempChar;
             for (int k = 0; k < tempCharArr.length; k++) {
-                if (thereIsIgnoreChar(oneWordFromUserSentence.charAt(indFirstLetter), ignoreSymbols) != true && thereIsIgnoreChar(oneWordFromUserSentence.charAt(indLastLetter), ignoreSymbols) != true) {
+                if (!ignoreSymbols.contains(String.valueOf(oneWordFromUserSentence.charAt(indFirstLetter))) && !ignoreSymbols.contains(String.valueOf(oneWordFromUserSentence.charAt(indLastLetter)))) {
                     tempChar = tempCharArr[indFirstLetter];
                     tempCharArr[indFirstLetter] = tempCharArr[indLastLetter];
                     tempCharArr[indLastLetter] = tempChar;
                     indFirstLetter++;
                     indLastLetter--;
-                } else if (thereIsIgnoreChar(oneWordFromUserSentence.charAt(indFirstLetter), ignoreSymbols) == true && thereIsIgnoreChar(oneWordFromUserSentence.charAt(indLastLetter), ignoreSymbols) != true) {
+                } else if (ignoreSymbols.contains(String.valueOf(oneWordFromUserSentence.charAt(indFirstLetter))) && !ignoreSymbols.contains(String.valueOf(oneWordFromUserSentence.charAt(indLastLetter)))) {
                     indFirstLetter++;
-                } else if (thereIsIgnoreChar(oneWordFromUserSentence.charAt(indFirstLetter), ignoreSymbols) != true && thereIsIgnoreChar(oneWordFromUserSentence.charAt(indLastLetter), ignoreSymbols) == true) {
+                } else if (!ignoreSymbols.contains(String.valueOf(oneWordFromUserSentence.charAt(indFirstLetter))) && ignoreSymbols.contains(String.valueOf(oneWordFromUserSentence.charAt(indLastLetter)))) {
                     indLastLetter--;
                 }
                 if (indFirstLetter >= indLastLetter) {
@@ -30,7 +29,6 @@ public class Rotator {
                 }
             }
             wordsFromIncomingSentence[i] = String.copyValueOf(tempCharArr);
-            //indexesOfTheIgnoreChars.removeAll(indexesOfTheIgnoreChars);
         }
         String sentence = "";
         for (int i = 0; i < wordsFromIncomingSentence.length; i++) {
@@ -39,12 +37,5 @@ public class Rotator {
         sentence.trim();
         return sentence;
     }
-
-    private boolean thereIsIgnoreChar(char charFromWord, String ignore) {
-        boolean bool = false;
-        if (ignore.contains(String.valueOf(charFromWord))) {
-            bool = true;
-        }
-        return bool;
-    }
 }
+
