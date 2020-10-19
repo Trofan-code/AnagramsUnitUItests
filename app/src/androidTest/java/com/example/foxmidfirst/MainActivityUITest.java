@@ -23,7 +23,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.StringContains.containsString;
-
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -44,6 +44,7 @@ public class MainActivityUITest {
         onView(withId(R.id.edText1)).perform(typeText(userString), closeSoftKeyboard());
         onView(withId(R.id.edText2)).perform(typeText(ignoreString), closeSoftKeyboard());
         onView(withId(R.id.button1)).perform(click());
+        
 
 
 
