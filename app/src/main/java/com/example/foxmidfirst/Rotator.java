@@ -1,15 +1,9 @@
 package com.example.foxmidfirst;
 
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import java.util.ArrayList;
-
 public class Rotator {
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public String rotateWord(String sentenceFromUser, String ignoreSymbols) {
         String[] wordsFromIncomingSentence = sentenceFromUser.split(" ");
         for (int i = 0; i < wordsFromIncomingSentence.length; i++) {
@@ -42,7 +36,7 @@ public class Rotator {
             //arr = String.join(" ",wordsFromIncomingSentence[i]);
             sentence += wordsFromIncomingSentence[i] + " ";
         }
-        sentence.replaceAll("\\s+$", "");
+       // sentence.replaceAll("\\s+$", "");
 
         return sentence.trim();
     }
