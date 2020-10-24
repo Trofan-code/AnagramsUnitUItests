@@ -3,110 +3,58 @@ package com.example.foxmidfirst;
 import org.junit.After;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.Assert. *;
 
+@RunWith(Parameterized.class)
 public class RotatorTest {
     Rotator rotator;
+    private String source ="";
+    private String ignoreString ="";
+    private String expected ="";
+
+    public RotatorTest(String source, String ignoreString, String expected) {
+        super();
+        this.source = source;
+        this.ignoreString = ignoreString;
+        this.expected = expected;
+    }
+    @Parameterized.Parameters
+    public static Collection input(){
+        return Arrays.asList(new Object[][] {
+                {"123456 3456","4","653421 6453"},
+                {"Foxminded cool 24/7","0123456789","dednimxoF looc 24/7"},
+                {"abcd efgh","0123456789","dcba hgfe"},
+                {"Foxminded cool 24/7","xl","dexdnimoF oocl 7/42"},
+                {"a1bcd efglh","xl","dcb1a hgfle"},
+                {"Foxminded cool 24/7"," ","dednimxoF looc 7/42"},
+                {" ","1№;%:?*()_+",""},
+                {"          ###.     ","fF",".###"},
+                {null,"fF",".###"},
+                {"234455",null,"234455"},
+                {"Dfsgyhsdrfhgdfhgbdfghseiudytgfiuseyhgvkjdxhvkusdyrfgiuesayhfoiuhsdkjvhdfkxjgbviserugoisedjglkdfhjbkjhdfcklughbdkfsujghoiklshdgoi","","iogdhslkiohgjusfkdbhgulkcfdhjkbjhfdklgjdesioguresivbgjxkfdhvjkdshuiofhyaseuigfrydsukvhxdjkvghyesuifgtyduieshgfdbghfdghfrdshygsfD"},
+                {"Dfsgyhsdrfhgdfhgbdfghseiudytgfiuseyhgvkjdxhvkusdyrfgiuesayhfoiuhsdkjvhdfkxjgbviserugoisedjglkdfhjbkjhdfcklughbdkfsujghoiklshdgoi","Dfsgyhsdrfhgdfhgbdfghseiudytgfiuseyhgvkjdxhvkusdyrfgiuesayhfoiuhsdkjvhdfkxjgbviserugoisedjglkdfhjbkjhdfcklughbdkfsujghoiklshdgoi","Dfsgyhsdrfhgdfhgbdfghseiudytgfiuseyhgvkjdxhvkusdyrfgiuesayhfoiuhsdkjvhdfkxjgbviserugoisedjglkdfhjbkjhdfcklughbdkfsujghoiklshdgoi"},
+        });
+    }
 
     @Before
     public void before() {
         rotator = new Rotator();
-
     }
-
     @After
     public void after() {
-
     }
     @Test
     public void test1() {
-        String source = "123456 3456";
-        String expected = "653421 6453";
-        String actual = rotator.rotateWord(source,"4");
+        String actual = rotator.rotateWord(source,ignoreString);
+        assertNotNull(rotator.rotateWord(source,ignoreString));
         assertEquals(expected,actual);
     }
-    @Test
-    public void test2() {
-        String source = "Foxminded cool 24/7";
-        String expected = "dednimxoF looc 24/7";
-        String actual = rotator.rotateWord(source,"0123456789");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test3() {
-        String source = "abcd efgh";
-        String expected = "dcba hgfe";
-        String actual = rotator.rotateWord(source,"0123456789");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test4() {
-        String source = "Foxminded cool 24/7";
-        String expected = "dexdnimoF oocl 7/42";
-        String actual = rotator.rotateWord(source,"xl");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test5() {
-        String source = "a1bcd efglh";
-        String expected = "dcb1a hgfle";
-        String actual = rotator.rotateWord(source,"xl");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test6() {
-        String source = "Foxminded cool 24/7";
-        String expected = "dednimxoF looc 7/42";
-        String actual = rotator.rotateWord(source," ");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test7() {
-        String source = " ";
-        String expected = "";
-        String actual = rotator.rotateWord(source,"1№;%:?*()_+");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test8() {
-        String source = "Foxminded cool 24/7";
-        String expected = "dednimxoF looc 7/42";
-        String actual = rotator.rotateWord(source,"f");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test9() {
-        String source = "";
-        String expected = "";
-        String actual = rotator.rotateWord(source,"fF");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test10() {
-        String source = "          ###.     ";
-        String expected = ".###";
-        String actual = rotator.rotateWord(source,"fF");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test11() {
-        String source = "авджылпроыводкрплыврплыфрплыкрвпшгукрлгдпрвыалпрлвоарплдырпдорыдопордлоыврплоаитвмбчятсмловиыаплоррывлпоруыдподывропловаипмлварплоывфралорывлопитвальмилвоарплоывраплоыфрплодвыармлочаитмлваориплмовырплоыврплоаворпло";
-        String expected = "олпроваолпрвыолпрывомлпироавлмтиачолмраывдолпрфыолпарвыолпраовлимьлавтиполвыроларфвыолправлмпиаволпорвыдопдыуроплвырролпаыиволмстячбмвтиаолпрвыолдроподыродпрыдлпраовлрплаыврпдглркугшпвркылпрфылпрвылпркдовыорплыждва";
-        String actual = rotator.rotateWord(source,"0");
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void test12() {
-        String source = "";
-        String expected = "";
-        String actual = rotator.rotateWord(source,"fF");
-        assertEquals(expected,actual);
-    }
-
-
-
-
-
 }
