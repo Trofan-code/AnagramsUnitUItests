@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FoxmidFirst</string>
+    <string name="txtViev1">Введи строку</string>
+    <string name="txtViev2">Игнорируемые символы</string>
+    <string name="btn1">Старт</string>
+    <string name="txtViev3">Ответ: </string>
+    <string name="btn2">Очистить</string>
 </resources>
