@@ -78,5 +78,4 @@ public class MainActivityUITest {
         onView(withId(R.id.button1)).perform(click());
         onView(withId(R.id.textView4)).check(matches(withText(containsString(answer))));
     }
-
 }
